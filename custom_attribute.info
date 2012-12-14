@@ -1,0 +1,5 @@
+core = "6.x"
+dependencies[] = "uc_cart"
+description = "Ubercart product attributes custom(Chetan sharma)"
+name = "Ubercart product attributes custom(Chetan sharma)"
+version = "6.x-1.0"
