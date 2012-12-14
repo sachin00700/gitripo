@@ -1,0 +1,151 @@
+<?php
+
+ 
+  
+function custom_attribute_cart_item($op, &$item) 
+{
+			//echo '<pre>';
+			//print_r($item);
+			//echo '<pre>';
+			//print_r($item);
+			//echo '</pre>';
+			
+
+
+	if ($item->nid =="44") 
+		{
+    	switch ($op) 
+		{
+    		case 'load': 
+			
+			       
+			$height = $item->data[attributes][18];
+			$width =  $item->data[attributes][19];
+			$frame =  $item->data[attributes][20];
+			$text =    $item->data[attributes][22];
+			$first_check_thirtysix =    $item->data[attributes][8];
+			//$sec_check_seventyfive =    $item->data[attributes][8][9];
+			$third_check_nine =    $item->data[attributes][15];
+			$qty_check_nine =    $item->data[attributes][31];
+
+
+
+			$hight_width= $height + $width;
+
+			 if($hight_width <= 35)
+				{
+					$first= $hight_width * 2.25 * .5;
+					$price_per_frame = $first+ 39;
+					
+					   $first_price = $price_per_frame;
+					
+					}else{ $first_price=0; }
+				
+				  if($hight_width >= 36   && $hight_width <= 59 )
+					   { 
+					$first_sec= $hight_width * 2.25 * .85;
+					$price_per_frame_sec = $first_sec+ 49;
+					
+				   $first_price_sec = $price_per_frame_sec;
+					 
+						 }else{ $first_price_sec=0; }
+						 
+						   if($hight_width <= 90 && $hight_width>= 60)
+					   { 
+					$first_third= $hight_width * 2.25;
+					$price_per_frame_third = $first_third+ 59;
+				 
+				   $first_price_third = $price_per_frame_third;
+					 
+						 }else{ $first_price_third=0; }
+						 
+						$total_height_width=$first_price + $first_price_sec + $first_price_third;
+			 
+			$lenght = strlen($text);
+			$spaces = substr_count($text, ' ');
+    
+	 if($lenght-$spaces >0 && $lenght-$spaces<11)
+      {
+     	 $tolal_length=10;
+	      } 
+	      else if($lenght-$spaces > 10)
+	        { 
+	         $tolal_length=20; 
+			  }
+			  else
+			  {
+			 $tolal_length=0;
+			  
+			  }
+			
+   $lenght_tot= $tolal_length;
+
+if($third_check_nine == 12 && $qty_check_nine=="")
+    {
+	    $third_step_tot = 11.99;
+	     }
+		 
+		 elseif($third_check_nine == 12 && $qty_check_nine!="")
+		    {
+		   $third_step_tot = $qty_check_nine * 11.99;
+		 
+		   }
+		   elseif($third_check_nine == 11 && $qty_check_nine=="")
+		     {
+	   
+             $third_step_tot = 14.99;
+	          }
+		      
+			  elseif($third_check_nine == 11 && $qty_check_nine!="")
+		        {
+	   
+                $third_step_tot = $qty_check_nine * 14.99;
+	           }
+		   
+    	     
+		      else
+		       {
+		        $third_step_tot=0;
+	     	     
+				 } 
+
+
+
+
+
+if($first_check_thirtysix == 8)
+   {
+
+   $first_check_val=36;
+
+    }
+        elseif($first_check_thirtysix == 9)
+		
+		{   
+		$first_check_val=75;
+		
+		}
+		
+		else{
+		$first_check_val=0;
+		
+		}
+
+    $final_value= $lenght_tot + $total_height_width + $third_step_tot + $first_check_val;
+    $final_value = $final_value + ($final_value*15)/100;
+    
+
+   $item->price = $final_value;
+}
+}
+
+ return $result;
+}
+
+
+
+
+
+
+
+
